@@ -3,8 +3,8 @@ stages:
   jobs:
   - job: CI
     steps:
-    - script: npm install
-      displayName: 'install nodejs dependencies'
+    - script: mvn clean package && mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar
+      displayName: 'install maven dependencies'
 
     - script: docker build -t ${COMPONENT} .
       displayName: 'build docker image'
