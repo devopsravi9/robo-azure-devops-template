@@ -24,3 +24,5 @@ stages:
         docker push public.ecr.aws/u3t4a1d0/${COMPONENT}:latest
       displayName: 'upload an artifact 3'
 
+
+
