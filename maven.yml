@@ -22,5 +22,5 @@ stages:
       displayName: 'upload an artifact 2 '
     - script:
         docker push public.ecr.aws/u3t4a1d0/${COMPONENT}:latest
-      displayName: 'upload an artifact 3 '
+      displayName: 'upload an artifact 3'
 
