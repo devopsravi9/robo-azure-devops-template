@@ -1,0 +1,26 @@
+stages:
+- stage: CI
+  jobs:
+  - job: CI
+    steps:
+    - script: npm install
+      displayName: 'install nodejs dependencies'
+
+    - script: docker build -t ${COMPONENT} .
+      displayName: 'build docker image'
+
+- stage: DockerUpload
+  condition: succeeded()
+  jobs:
+  - job: DockerUpload
+    steps:
+    - script:
+        aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/u3t4a1d0
+      displayName: 'upload an artifact 1 '
+    - script:
+        docker tag ${COMPONENT}:latest public.ecr.aws/u3t4a1d0/${COMPONENT}:latest
+      displayName: 'upload an artifact 2 '
+    - script:
+        docker push public.ecr.aws/u3t4a1d0/${COMPONENT}:latest
+      displayName: 'upload an artifact 3 '
+
