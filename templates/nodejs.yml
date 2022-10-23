@@ -10,6 +10,7 @@ stages:
       displayName: 'build docker image'
 
 - stage: DockerUpload
+  condition: succeeded()
   jobs:
   - job: DockerUpload
     steps:
